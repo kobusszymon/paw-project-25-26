@@ -54,3 +54,20 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+# Nie trzeba dodawać null = False i blank = False, bo są one domyślne
+class Osoba(models.Model):
+    PLEC = (
+        ('K', 'kobieta'),
+        ('M', 'mężczyzna'),
+        ('I', 'inna')
+    )
+    imie = models.CharField(max_length = 50, null = False, blank = False)
+    nazwisko = models.CharField(max_length = 100, null = False, blank = False)
+    plec = models.CharField(max_length = 1, choices = PLEC, default = 'I')
+    stanowisko = models.ForeignKey('Stanowisko', on_delete = models.CASCADE)
+# Gdy definiowana klasa byłaby przed tą klasą to możemy zapisać ją bez '', ale trzeba uważać żeby dobrze zapisać nazwę :P
+
+class Stanowisko(models.Model):
+    nazwa = models.CharField(max_length = 70, null = False, blank = False)
+    opis = models.TextField(null = True, blank = True)
