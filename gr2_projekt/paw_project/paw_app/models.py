@@ -13,6 +13,10 @@ BOOK_FORMATS = (
     ('A', 'Audiobook'),
 )
 
+class Plec(models.IntegerChoices):
+    MEZCZYZNA = 1
+    KOBIETA = 2
+    INNA = 3
 
 class Genre(models.Model):
     """Model reprezentujący gatunek literacki."""
@@ -57,10 +61,6 @@ class Book(models.Model):
 
 # Nie trzeba dodawać null = False i blank = False, bo są one domyślne
 class Osoba(models.Model):
-    class Plec(models.IntegerChoices):
-        MEZCZYZNA = 1
-        KOBIETA = 2
-        INNA = 3
     #PLEC = ( 
     #    ('K', 'kobieta'),
     #    ('M', 'mężczyzna'),
@@ -70,6 +70,7 @@ class Osoba(models.Model):
     nazwisko = models.CharField(max_length = 100, null = False, blank = False)
     #plec = models.CharField(max_length = 1, choices = PLEC, default = 'I') - poprzednia wersja
     plec = models.IntegerField(choices=Plec.choices, default = 3)
+    # można to jeszcze zrobić jako IntegerField(choices=PLCIE.choices, default = PLCIE.choices[0][2])
     stanowisko = models.ForeignKey('Stanowisko', on_delete = models.CASCADE)
     data_dodania = models.DateTimeField(auto_now_add = True, editable = False)
 # Gdy definiowana klasa byłaby przed tą klasą to możemy zapisać ją bez '', ale trzeba uważać żeby dobrze zapisać nazwę :P
