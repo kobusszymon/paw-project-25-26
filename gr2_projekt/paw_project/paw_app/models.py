@@ -57,15 +57,21 @@ class Book(models.Model):
 
 # Nie trzeba dodawać null = False i blank = False, bo są one domyślne
 class Osoba(models.Model):
-    PLEC = (
-        ('K', 'kobieta'),
-        ('M', 'mężczyzna'),
-        ('I', 'inna')
-    )
+    class Plec(models.IntegerChoices):
+        MEZCZYZNA = 1
+        KOBIETA = 2
+        INNA = 3
+    #PLEC = ( 
+    #    ('K', 'kobieta'),
+    #    ('M', 'mężczyzna'),
+    #    ('I', 'inna')
+    #) - poprzednia wersja
     imie = models.CharField(max_length = 50, null = False, blank = False)
     nazwisko = models.CharField(max_length = 100, null = False, blank = False)
-    plec = models.CharField(max_length = 1, choices = PLEC, default = 'I')
+    #plec = models.CharField(max_length = 1, choices = PLEC, default = 'I') - poprzednia wersja
+    plec = models.IntegerField(choices=Plec.choices, default = 3)
     stanowisko = models.ForeignKey('Stanowisko', on_delete = models.CASCADE)
+    data_dodania = models.DateTimeField(auto_now_add = True, editable = False)
 # Gdy definiowana klasa byłaby przed tą klasą to możemy zapisać ją bez '', ale trzeba uważać żeby dobrze zapisać nazwę :P
 
 class Stanowisko(models.Model):
