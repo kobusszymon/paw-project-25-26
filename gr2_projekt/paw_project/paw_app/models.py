@@ -73,6 +73,12 @@ class Osoba(models.Model):
     # można to jeszcze zrobić jako IntegerField(choices=PLCIE.choices, default = PLCIE.choices[0][2])
     stanowisko = models.ForeignKey('Stanowisko', on_delete = models.CASCADE)
     data_dodania = models.DateTimeField(auto_now_add = True, editable = False)
+    
+    class Meta:
+        ordering = ["nazwisko"]
+
+    def __str__(self):
+        return f"{self.imie} {self.nazwisko}"
 # Gdy definiowana klasa byłaby przed tą klasą to możemy zapisać ją bez '', ale trzeba uważać żeby dobrze zapisać nazwę :P
 
 class Stanowisko(models.Model):
