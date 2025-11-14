@@ -125,3 +125,5 @@ class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
         fields = "__all__"
+
+# dorobić serializery dla OSOBY i STANOWISKA i dodać walidację min. dla osoby zgodnie z zadaniami 5 i 6 w githubie, można zrobić 7 zadanie
