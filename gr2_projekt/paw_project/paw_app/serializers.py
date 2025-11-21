@@ -72,6 +72,14 @@ class BookSerializer(serializers.ModelSerializer):
             )
         return value
     
+class OsobaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Osoba
+        fields = '__all__'
+    
+    def validate_imie(self, value):
+        return super().validate(attrs)
+    
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
