@@ -1,9 +1,11 @@
 # plik biblioteka/urls.py
-
+from django.contrib import admin
 from django.urls import path, include
 from . import views
 
 urlpatterns = [
+    path('biblioteka/', include('biblioteka.urls')), # dołączamy reguły url z pliku biblioteka\urls.py
+    path('admin/', admin.site.urls),
     path('books/', views.book_list),
     path('books/<int:pk>/', views.book_detail),
     path('osoby/', views.osoba_list),
@@ -21,4 +23,7 @@ urlpatterns = [
     # path('osoby_vbs/nazwisko', views.OsobaNameFilterView.as_view()),
     # path('stanowiska_vbs/', views.StanowiskoListAPIView.as_view()),
     # path('stanowiska_vbs/<int:pk>/', views.StanowiskoDetailAPIView.as_view()),
+    path("welcome/", views.welcome_view),
+    path("html/osoby/", views.osoba_list_html, name="osoba-list"),
+    path("html/osoby/<int:id>/", views.osoba_detail_html, name="osoba-detail"),
 ]
