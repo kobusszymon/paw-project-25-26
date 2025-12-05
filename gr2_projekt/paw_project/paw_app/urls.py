@@ -4,7 +4,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('biblioteka/', include('biblioteka.urls')), # dołączamy reguły url z pliku biblioteka\urls.py
+    path('biblioteka/', include('paw_app.urls')), # dołączamy reguły url z pliku biblioteka\urls.py
     path('admin/', admin.site.urls),
     path('books/', views.book_list),
     path('books/<int:pk>/', views.book_detail),
